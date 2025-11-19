@@ -59,6 +59,8 @@
         <audio id="waterfall" src="waterfall.mp3"></audio>
         <!-- Pre-recorded Tamil Audio -->
         <audio id="taAudio" src="hundru.mp3"></audio>
+        <!-- Pre-recorded Odia Audio -->
+        <audio id="orAudio" src="hundru-or.m4a"></audio>
       </a-assets>
 
       <!-- SKY IMAGE -->
@@ -74,6 +76,7 @@
     <button onclick="playDescription('en')">🎧 Play English Description</button>
     <button onclick="playDescription('hi')">🎙️ प्ले हिंदी विवरण</button>
     <button onclick="playDescription('ta')">🔊 தமிழ் விளக்கம்</button>
+    <button onclick="playDescription('or')">🪔 ଓଡ଼ିଆ ବର୍ଣ୍ଣନା</button>
     <button onclick="goPrev()">⬅️ Previous Location</button>
     <button onclick="goNext()">Next Location ➡️</button>
   </div>
@@ -85,6 +88,13 @@
       if (lang === 'ta') {
         const audio = document.getElementById("taAudio");
         audio.play().catch(err => console.log("Tamil play error:", err));
+        return;
+      }
+
+      // ====== ODIA AUDIO USING hundru-or.mp3 ======
+      if (lang === 'or') {
+        const audio = document.getElementById("orAudio");
+        audio.play().catch(err => console.log("Odia play error:", err));
         return;
       }
 
