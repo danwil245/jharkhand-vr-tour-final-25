@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hundru Falls – Virtual Tour 💧</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+    #view {
+      width: 100%;
+      height: 80vh;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .controls {
+      padding: 10px;
+    }
+    button {
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Hundru Falls – Virtual Tour 💧</h1>
+
+  <!-- 360° VIEW AREA -->
+  <div id="view">
+    <a-scene embedded>
+
+      <!-- Load local assets -->
+      <a-assets>
+        <img id="skyimg" src="hundru-falls.jpg">
+        <audio id="waterfall" src="waterfall.mp3"></audio>
+        <!-- Pre-recorded Tamil Audio -->
+        <audio id="taAudio" src="hundru.mp3"></audio>
+      </a-assets>
+
+      <!-- SKY IMAGE -->
+      <a-sky src="#skyimg"></a-sky>
+
+      <!-- BACKGROUND SOUND -->
+      <a-entity sound="src: #waterfall; autoplay: true; loop: true; volume: 1.0;"></a-entity>
+
+    </a-scene>
+  </div>
+
+  <div class="controls">
+    <button onclick="playDescription('en')">🎧 Play English Description</button>
+    <button onclick="playDescription('hi')">🎙️ प्ले हिंदी विवरण</button>
+    <button onclick="playDescription('ta')">🔊 தமிழ் விளக்கம்</button>
+    <button onclick="goPrev()">⬅️ Previous Location</button>
+    <button onclick="goNext()">Next Location ➡️</button>
+  </div>
+
+  <script>
+    function playDescription(lang) {
+
+      // ====== TAMIL AUDIO USING hundru.mp3 ======
+      if (lang === 'ta') {
+        const audio = document.getElementById("taAudio");
+        audio.play().catch(err => console.log("Tamil play error:", err));
+        return;
+      }
+
+      // ====== ENGLISH & HINDI USING BROWSER TTS ======
+      const utterance = new SpeechSynthesisUtterance();
+
+      if (lang === 'en') {
+        utterance.text = 
+          "Welcome to Hundru Falls, one of the highest and most beautiful waterfalls in Jharkhand. The Subarnarekha River plunges from a great height, creating a magnificent mist and roar. The surrounding forest and rocky cliffs make it a popular tourist spot.";
+        utterance.lang = 'en-IN';
+
+      } else if (lang === 'hi') {
+        utterance.text =
+          "हिंद्रु जलप्रपात में आपका स्वागत है। यह झारखंड के सबसे ऊँचे और सुंदर झरनों में से एक है। यहाँ सुवर्णरेखा नदी ऊँचाई से गिरती है, जिससे चारों ओर धुंध और गर्जना का सुंदर दृश्य बनता है। आसपास का जंगल और चट्टानें इस स्थान को बेहद आकर्षक बनाती हैं।";
+        utterance.lang = 'hi-IN';
+
+      }
+
+      utterance.rate = 1;
+      speechSynthesis.speak(utterance);
+    }
+
+    function goPrev() { window.location.href = "temple.html"; }
+    function goNext() { window.location.href = "patratu.html"; }
+  </script>
+
+</body>
+</html>

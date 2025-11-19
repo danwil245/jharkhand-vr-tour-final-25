@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jharkhand VR Tourism – Map Menu</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Poppins, sans-serif;
+        background: black;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        position: relative;
+        width: 70vw;
+        max-width: 800px;
+        min-width: 350px;
+    }
+
+    .map-img {
+        width: 100%;
+        filter: drop-shadow(0 0 20px rgba(0,255,255,0.4));
+    }
+
+    .marker {
+        position: absolute;
+        background: rgba(255, 215, 0, 0.9);
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        transition: 0.2s;
+    }
+
+    .marker:hover {
+        background: rgba(255, 140, 0, 1);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .title {
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 2px 2px 10px black;
+    }
+
+    .info-box {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        background: rgba(0, 0, 0, 0.65);
+        border: 2px solid #00e5ff;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 14px;
+        line-height: 1.4;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+
+    .speak-btn {
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background: #00e5ff;
+        color: black;
+        border-radius: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 10px cyan;
+    }
+
+    .speak-btn:hover {
+        background: #00bcd4;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="title">Jharkhand VR Tourism Map</div>
+
+    <img src="jharkhand-map.jpg" class="map-img">
+
+    <!-- Hotspots -->
+    <div class="marker" style="top: 48%; left: 80%;" onclick="location.href='temple.html'">
+        Baidyanath Temple
+    </div>
+
+    <div class="marker" style="top: 63%; left: 52%;" onclick="location.href='hundru.html'">
+        Hundru Falls
+    </div>
+
+    <div class="marker" style="top: 55%; left: 45%;" onclick="location.href='patratu.html'">
+        Patratu Valley
+    </div>
+
+    <div class="marker" style="top: 55%; left: 25%;" onclick="location.href='netarhat.html'">
+        Netarhat
+    </div>
+
+    <div class="marker" style="top: 72%; left: 20%;" onclick="location.href='betla.html'">
+        Betla Park
+    </div>
+
+    <!-- Tagore Hill removed completely -->
+
+    <!-- Info Box -->
+    <div class="info-box" id="infoText">
+        Jharkhand, known as the "Land of Forests," is rich in natural beauty, waterfalls, wildlife,
+        tribal culture, and serene hill ranges. Explore the state's most iconic tourist destinations
+        through this interactive VR experience.
+    </div>
+
+    <!-- English Speech Button -->
+    <button class="speak-btn" onclick="speakEnglish()">🔊 Speak (English)</button>
+
+</div>
+
+<script>
+function speakEnglish() {
+    const text = document.getElementById("infoText").innerText;
+
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-IN";
+    speech.rate = 0.95;
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(speech);
+}
+</script>
+
+</body>
+</html>

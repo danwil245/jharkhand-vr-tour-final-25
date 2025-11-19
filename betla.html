@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Betla National Park – Virtual Tour 🐘</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <style>
+    body { margin: 0; background: black; font-family: Arial, sans-serif; color: white; text-align: center; }
+    h1 { margin-top: 10px; font-size: 24px; }
+    #view { width: 100%; height: 80vh; border-radius: 12px; overflow: hidden; }
+    .controls { padding: 10px; }
+    button { 
+      background-color: #0078d7; color: white; border: none; border-radius: 8px;
+      padding: 10px 20px; margin: 6px; font-size: 16px; cursor: pointer;
+    }
+    button:hover { background-color: #005fa3; }
+  </style>
+</head>
+<body>
+
+<h1>Betla National Park – Virtual Tour 🐘</h1>
+
+<div id="view">
+  <a-scene embedded>
+
+    <!-- Preload assets -->
+    <a-assets>
+      <img id="skyimg" src="betla-national-park-360.jpg">
+      <audio id="bg-sound" src="forest.mp3"></audio>
+      <audio id="tamil-audio" src="betla.mp3"></audio> <!-- Added Tamil audio here -->
+    </a-assets>
+
+    <!-- Skybox -->
+    <a-sky src="#skyimg" rotation="0 -90 0"></a-sky>
+
+    <!-- Background sound -->
+    <a-entity sound="src: #bg-sound; autoplay: true; loop: true; volume: 1.0;"></a-entity>
+
+  </a-scene>
+</div>
+
+<div class="controls">
+  <button onclick="playDescription('en')">🎧 Play English Description</button>
+  <button onclick="playDescription('hi')">🎙️ प्ले हिंदी विवरण</button>
+  <button onclick="playTamilDescription()">🎤 தமிழ் விவரம் இயக்கவும்</button> <!-- Tamil button -->
+  
+  <button onclick="goPrev()">⬅️ Previous Location</button>
+  <button onclick="exitTour()">🚪 Exit Tour</button>
+</div>
+
+<script>
+  function playDescription(lang) {
+    const utterance = new SpeechSynthesisUtterance();
+
+    if (lang === "en") {
+      utterance.text =
+        "Welcome to Betla National Park, one of the richest wildlife zones of Jharkhand. Dense forests, waterfalls, elephants, deer, bison and many bird species make this place naturally mesmerizing. The peaceful green surroundings offer a refreshing and immersive experience.";
+      utterance.lang = "en-IN";
+    } 
+    else if (lang === "hi") {
+      utterance.text =
+        "बेतला राष्ट्रीय उद्यान में आपका स्वागत है। यह झारखंड के सबसे समृद्ध वन क्षेत्रों में से एक है। यहाँ घने जंगल, जलप्रपात, हाथी, हिरण, बाइसन और अनेक पक्षियों की प्रजातियाँ पाई जाती हैं। प्रकृति से घिरा यह स्थान शांत और बेहद मनमोहक अनुभव प्रदान करता है।";
+      utterance.lang = "hi-IN";
+    } 
+    else if (lang === "ta") {
+      utterance.text =
+        "பெட்லா தேசிய பூங்காவிற்கு வரவேற்கிறோம். இது ஜார்கண்டின் மிகச் செழிப்பான வனப் பகுதிகளில் ஒன்றாகும். அடர்ந்த காடுகள், அருவிகள், யானைகள், மான், பைசன் மற்றும் பல பறவை இனங்கள் இங்கு காணப்படுகின்றன. இயற்கையால் சூழப்பட்ட இந்த அமைதியான சூழல் ஒரு மனதை கவரும் அனுபவத்தை வழங்குகிறது.";
+      utterance.lang = "ta-IN";
+    }
+
+    utterance.rate = 1;
+    speechSynthesis.speak(utterance);
+  }
+
+  function playTamilDescription() {
+    // Access the preloaded Tamil audio and play it
+    const tamilAudio = document.getElementById('tamil-audio');
+    tamilAudio.play().catch(err => console.log("Tamil audio error:", err));
+  }
+
+  function goPrev() { window.location.href = "netarhat.html"; }
+  function exitTour() { window.location.href = "index.html"; }
+</script>
+
+</body>
+</html>
